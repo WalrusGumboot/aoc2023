@@ -41,6 +41,12 @@ fn check_neighbours(grid: &Vec<Vec<Option<char>>>, row: usize, col: usize) -> bo
     false
 }
 
+// // used in part two
+// enum Entry {
+//     Digit(u8),
+//     Gear(u8) // number of neighbours
+// }
+
 fn main() {
     let raw_input = fs::read_to_string("./input.txt").unwrap();
     let grid: Vec<Vec<Option<char>>> = raw_input
@@ -52,8 +58,10 @@ fn main() {
         })
         .collect();
 
-    // now, we make the numbers contiguous and check if they're next to non-period characters
 
+    // part one -- sum of all numbers
+
+    // now, we make the numbers contiguous and check if they're next to non-period characters
     let mut numbers = Vec::new();
     let mut working_number = None;
 
@@ -136,12 +144,26 @@ fn main() {
         // println!("nothing");
     }
 
-    let values = numbers.iter().map(|n| n.value).collect::<Vec<_>>();
-    let solution: u32 = numbers.iter().map(|n| n.value).sum();
+    let part_one: u32 = numbers.iter().map(|n| n.value).sum();
+    println!("{part_one}");
 
-    // println!("{values:?}");
-    // println!("{:?}", values.iter().min());
-    println!("{solution:?}");
+    // // part two -- sum of "gear ratios"
+
+    // let mut adapted_grid = grid.clone().iter().map(|row| row.iter().map(|c| {
+    //     if let Some(ch) = c {
+    //         if ch == &'*' {
+    //             Some(Entry::Gear(0))
+    //         } else if ch.is_numeric() {
+    //             Some(Entry::Digit(ch.to_digit(10).unwrap().try_into().unwrap()))
+    //         } else { None }
+    //     } else { None }
+    // }).collect::<Vec<_>>()).collect::<Vec<_>>();
+
+    // for row in 0..adapted_grid.len() {
+    //     for col in 0..adapted_grid[0].len() {
+
+    //     }
+    // }
 }
 
 #[cfg(test)]
